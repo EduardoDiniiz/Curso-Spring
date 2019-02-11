@@ -1,8 +1,9 @@
-package com.eduardo.estudomc.estudomc.categoria;
+package com.eduardo.estudomc.estudomc.produto;
 
-import com.eduardo.estudomc.estudomc.produto.Produto;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.eduardo.estudomc.estudomc.categoria.Categoria;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Builder
-public class Categoria implements Serializable {
+public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,17 +25,23 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+    private Double preco;
 
-    @JsonManagedReference
-    @ManyToMany(mappedBy = "categorias")
-    private List<Produto> produtos = new ArrayList<Produto>();
+    @JsonBackReference
+    @ManyToMany
+    @JoinTable(name = "PRODUTO_CATEGORIA",
+        joinColumns = @JoinColumn(name = "produto_id"),
+        inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
+    private List<Categoria> categorias = new ArrayList<>();
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Categoria categoria = (Categoria) o;
-        return Objects.equals(id, categoria.id);
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id);
     }
 
     @Override

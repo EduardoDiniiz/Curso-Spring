@@ -1,5 +1,6 @@
 package com.eduardo.estudomc.estudomc.categoria;
 
+import com.eduardo.estudomc.estudomc.Exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,10 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository repository;
 
-    public Optional<Categoria> find(Integer id){
+    public Categoria find(Integer id){
 
         Optional<Categoria> obj = repository.findById(id);
-        return obj;
+        return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id
+                + ", Tipo: " +Categoria.class.getName()));
     }
 }
