@@ -49,12 +49,12 @@ public class EstudomcApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Categoria cat1 = Categoria.builder().id(null).nome("Informática").produtos(new ArrayList<>()).build();
-		Categoria cat2 = Categoria.builder().id(null).nome("Escritorio").produtos(new ArrayList<>()).build();
+		Categoria cat1 = new Categoria(null,"Informática");
+		Categoria cat2 = new Categoria(null,"Escritorio");
 
-		Produto p1 = Produto.builder().id(null).nome("Computador").preco(2000.00).categorias(new ArrayList<>()).build();
-		Produto p2 = Produto.builder().id(null).nome("Impressora").preco(800.00).categorias(new ArrayList<>()).build();
-		Produto p3 = Produto.builder().id(null).nome("Mouse").preco(80.00).categorias(new ArrayList<>()).build();
+		Produto p1 = new Produto(null,"Computador", 2000.00);
+		Produto p2 = new Produto(null, "Impressora", 800.00);
+		Produto p3 = new Produto(null, "Mouse", 80.00);
 
 		System.out.println("Esse é P1" + p1.getNome());
 
@@ -68,12 +68,12 @@ public class EstudomcApplication implements CommandLineRunner {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
-		Estado estado1 = Estado.builder().id(null).nome("Minas Gerais").cidades(new ArrayList<Cidade>()).build();
-		Estado estado2 = Estado.builder().id(null).nome("São Paulo").cidades(new ArrayList<Cidade>()).build();
+		Estado estado1 = new Estado(null, "Minas Gerais");
+		Estado estado2 = new Estado(null,"São Paulo");
 
-		Cidade cidade1 = Cidade.builder().id(null).nome("Uberlândia").estado(estado1).build();
-		Cidade cidade2 = Cidade.builder().id(null).nome("São Paulo").estado(estado2).build();
-		Cidade cidade3 = Cidade.builder().id(null).nome("Campinas").estado(estado2).build();
+		Cidade cidade1 = new Cidade(null,"Uberlândia", estado1);
+		Cidade cidade2 = new Cidade(null, "São Paulo", estado2);
+		Cidade cidade3 = new Cidade(null, "Campinas", estado2);
 
 		estado1.getCidades().addAll(Arrays.asList(cidade1));
 		estado2.getCidades().addAll(Arrays.asList(cidade2, cidade3));
@@ -84,8 +84,8 @@ public class EstudomcApplication implements CommandLineRunner {
 		Cliente cliente1 = new Cliente(null, "Marria Silva", "maria@gmail.com", "32341566", TipoCliente.PESSOAFISICA);
 		cliente1.getTelefones().addAll(Arrays.asList("32452233", "322618654"));
 
-		Endereco endereco1 = Endereco.builder().id(null).logradouro("Rua Flores").numero("300").complemento("Apto 303").bairro("Jardim").cep("5523123331").cidade(cidade1).cliente(cliente1).build();
-		Endereco endereco2 = Endereco.builder().id(null).logradouro("Avenida Matos").numero("105").complemento("Sala 800").logradouro("Centro").cep("3877012").cliente(cliente1).cidade(cidade2).build();
+		Endereco endereco1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "5523123331", cliente1, cidade1);
+		Endereco endereco2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "3877012", cliente1, cidade2);
 
 		cliente1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
 

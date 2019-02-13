@@ -2,7 +2,7 @@ package com.eduardo.estudomc.estudomc.Endereco;
 
 import com.eduardo.estudomc.estudomc.cidade.Cidade;
 import com.eduardo.estudomc.estudomc.cliente.Cliente;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,6 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Builder
 @EqualsAndHashCode
 public class Endereco implements Serializable {
 
@@ -28,6 +27,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
+    @JsonBackReference // Quer dizer que o cliente Endereco não pode serializar o cliente
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -36,4 +36,19 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 
+
+    public Endereco(){
+
+    }
+
+    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
+        this.id = id;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.cliente = cliente;
+        this.cidade = cidade;
+    }
 }

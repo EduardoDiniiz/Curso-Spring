@@ -2,7 +2,6 @@ package com.eduardo.estudomc.estudomc.produto;
 
 import com.eduardo.estudomc.estudomc.categoria.Categoria;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Builder
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +32,15 @@ public class Produto implements Serializable {
     )
     private List<Categoria> categorias = new ArrayList<>();
 
+    public Produto(){
+
+    }
+
+    public Produto(Integer id, String nome, Double preco) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -2,7 +2,6 @@ package com.eduardo.estudomc.estudomc.categoria;
 
 import com.eduardo.estudomc.estudomc.produto.Produto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Builder
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +26,15 @@ public class Categoria implements Serializable {
     @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<Produto>();
+
+    public Categoria(){
+
+    }
+
+    public Categoria(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,7 +1,7 @@
 package com.eduardo.estudomc.estudomc.estado;
 
 import com.eduardo.estudomc.estudomc.cidade.Cidade;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -25,7 +24,16 @@ public class Estado implements Serializable {
     private Integer id;
     private String nome;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "estado")
     private List<Cidade> cidades = new ArrayList<Cidade>();
 
+    public Estado(){
+
+    }
+
+    public Estado(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }

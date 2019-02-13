@@ -1,7 +1,7 @@
 package com.eduardo.estudomc.estudomc.cliente;
 
 import com.eduardo.estudomc.estudomc.Endereco.Endereco;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +29,7 @@ public class Cliente implements Serializable {
     private String CpfOuCnpj;
     private Integer tipoCliente;
 
+    @JsonManagedReference // Serve para serializar os endereços de cliente
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<Endereco>();
 
