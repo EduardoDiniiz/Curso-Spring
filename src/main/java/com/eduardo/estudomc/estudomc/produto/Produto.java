@@ -3,7 +3,6 @@ package com.eduardo.estudomc.estudomc.produto;
 import com.eduardo.estudomc.estudomc.categoria.Categoria;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
