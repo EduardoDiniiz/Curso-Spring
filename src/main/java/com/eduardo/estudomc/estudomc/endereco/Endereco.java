@@ -2,7 +2,7 @@ package com.eduardo.estudomc.estudomc.endereco;
 
 import com.eduardo.estudomc.estudomc.cidade.Cidade;
 import com.eduardo.estudomc.estudomc.cliente.Cliente;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +27,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
-    @JsonBackReference // Quer dizer que o cliente endereco não pode serializar o cliente
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

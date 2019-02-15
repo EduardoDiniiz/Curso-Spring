@@ -2,7 +2,7 @@ package com.eduardo.estudomc.estudomc.cliente;
 
 import com.eduardo.estudomc.estudomc.endereco.Endereco;
 import com.eduardo.estudomc.estudomc.pedido.Pedido;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +30,6 @@ public class Cliente implements Serializable {
     private String CpfOuCnpj;
     private Integer tipoCliente;
 
-    @JsonManagedReference // Serve para serializar os endereços de cliente
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<Endereco>();
 
@@ -38,6 +37,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name="TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 

@@ -1,14 +1,18 @@
 package com.eduardo.estudomc.estudomc.pedido;
 
+import com.eduardo.estudomc.estudomc.ItemPedido.ItemPedido;
 import com.eduardo.estudomc.estudomc.cliente.Cliente;
 import com.eduardo.estudomc.estudomc.endereco.Endereco;
 import com.eduardo.estudomc.estudomc.pagamento.Pagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,6 +24,8 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date instate;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
@@ -32,6 +38,9 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "endereco_entrega")
     private Endereco enderecoEntrega;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itens = new HashSet<>();
 
     public Pedido(){
 

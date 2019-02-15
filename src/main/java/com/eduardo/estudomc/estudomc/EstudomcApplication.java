@@ -1,5 +1,6 @@
 package com.eduardo.estudomc.estudomc;
 
+import com.eduardo.estudomc.estudomc.ItemPedido.ItemPedidoRepository;
 import com.eduardo.estudomc.estudomc.endereco.Endereco;
 import com.eduardo.estudomc.estudomc.endereco.EnderecoRepository;
 import com.eduardo.estudomc.estudomc.categoria.Categoria;
@@ -12,6 +13,7 @@ import com.eduardo.estudomc.estudomc.cliente.TipoCliente;
 import com.eduardo.estudomc.estudomc.estado.Estado;
 import com.eduardo.estudomc.estudomc.estado.EstadoRepository;
 import com.eduardo.estudomc.estudomc.pagamento.*;
+import com.eduardo.estudomc.estudomc.ItemPedido.ItemPedido;
 import com.eduardo.estudomc.estudomc.pedido.Pedido;
 import com.eduardo.estudomc.estudomc.pedido.PedidoRepository;
 import com.eduardo.estudomc.estudomc.produto.Produto;
@@ -50,6 +52,9 @@ public class EstudomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EstudomcApplication.class, args);
@@ -117,6 +122,18 @@ public class EstudomcApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
 		pagamentoRepository.saveAll(Arrays.asList(pagamento1, pagamento2));
 
+		ItemPedido itemPedido1 = new ItemPedido(pedido1, p1, 0.00, 1, 2000.0);
+		ItemPedido itemPedido2 = new ItemPedido(pedido1,p3, 0.00, 2, 80.00);
+		ItemPedido itemPedido3 = new ItemPedido(pedido2, p2, 100.00, 1, 800.00);
+
+		pedido1.getItens().addAll(Arrays.asList(itemPedido1, itemPedido2));
+		pedido2.getItens().addAll(Arrays.asList(itemPedido3));
+
+		p1.getItens().addAll(Arrays.asList(itemPedido1));
+		p2.getItens().addAll(Arrays.asList(itemPedido3));
+		p3.getItens().addAll(Arrays.asList(itemPedido2));
+
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3));
 	}
 }
 

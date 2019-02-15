@@ -1,6 +1,7 @@
 package com.eduardo.estudomc.estudomc.pagamento;
 
 import com.eduardo.estudomc.estudomc.pedido.Pedido;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,10 @@ import java.util.Date;
 @Setter
 public class PagamentoComBoleto extends Pagamento {
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataVencimento;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataPagamento;
 
     public PagamentoComBoleto(){
