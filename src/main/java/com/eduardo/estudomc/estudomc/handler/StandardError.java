@@ -1,4 +1,4 @@
-package com.eduardo.estudomc.estudomc.Handler;
+package com.eduardo.estudomc.estudomc.handler;
 
 import lombok.Builder;
 import lombok.Getter;

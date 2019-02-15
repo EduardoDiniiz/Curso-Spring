@@ -1,6 +1,6 @@
 package com.eduardo.estudomc.estudomc.categoria;
 
-import com.eduardo.estudomc.estudomc.Exceptions.ObjectNotFoundException;
+import com.eduardo.estudomc.estudomc.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

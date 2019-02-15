@@ -1,4 +1,4 @@
-package com.eduardo.estudomc.estudomc.Endereco;
+package com.eduardo.estudomc.estudomc.endereco;
 
 import com.eduardo.estudomc.estudomc.cidade.Cidade;
 import com.eduardo.estudomc.estudomc.cliente.Cliente;
@@ -27,7 +27,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
-    @JsonBackReference // Quer dizer que o cliente Endereco não pode serializar o cliente
+    @JsonBackReference // Quer dizer que o cliente endereco não pode serializar o cliente
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

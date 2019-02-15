@@ -1,6 +1,7 @@
 package com.eduardo.estudomc.estudomc.cliente;
 
-import com.eduardo.estudomc.estudomc.Endereco.Endereco;
+import com.eduardo.estudomc.estudomc.endereco.Endereco;
+import com.eduardo.estudomc.estudomc.pedido.Pedido;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,6 +37,9 @@ public class Cliente implements Serializable {
     @ElementCollection
     @CollectionTable(name="TELEFONE")
     private Set<String> telefones = new HashSet<>();
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
 
     public Cliente(){
 

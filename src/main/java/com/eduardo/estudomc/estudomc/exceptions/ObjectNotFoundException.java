@@ -1,4 +1,4 @@
-package com.eduardo.estudomc.estudomc.Exceptions;
+package com.eduardo.estudomc.estudomc.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException{
 

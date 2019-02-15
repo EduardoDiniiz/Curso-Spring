@@ -1,6 +1,6 @@
-package com.eduardo.estudomc.estudomc.Handler;
+package com.eduardo.estudomc.estudomc.handler;
 
-import com.eduardo.estudomc.estudomc.Exceptions.ObjectNotFoundException;
+import com.eduardo.estudomc.estudomc.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

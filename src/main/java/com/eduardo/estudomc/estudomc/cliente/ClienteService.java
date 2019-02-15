@@ -1,8 +1,6 @@
 package com.eduardo.estudomc.estudomc.cliente;
 
-import com.eduardo.estudomc.estudomc.Exceptions.ObjectNotFoundException;
-import com.eduardo.estudomc.estudomc.categoria.Categoria;
-import com.eduardo.estudomc.estudomc.categoria.CategoriaRepository;
+import com.eduardo.estudomc.estudomc.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
