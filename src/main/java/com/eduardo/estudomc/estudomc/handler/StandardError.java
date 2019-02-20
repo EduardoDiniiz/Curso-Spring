@@ -1,6 +1,5 @@
 package com.eduardo.estudomc.estudomc.handler;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +7,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@Builder
 public class StandardError implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,4 +14,13 @@ public class StandardError implements Serializable {
     private String msg;
     private Long TimeStamp;
 
+    public StandardError(){
+
+    }
+
+    public StandardError(Integer status, String msg, Long timeStamp) {
+        this.status = status;
+        this.msg = msg;
+        TimeStamp = timeStamp;
+    }
 }
