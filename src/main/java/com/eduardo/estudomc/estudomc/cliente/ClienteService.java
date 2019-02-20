@@ -1,5 +1,8 @@
 package com.eduardo.estudomc.estudomc.cliente;
 
+import com.eduardo.estudomc.estudomc.cidade.Cidade;
+import com.eduardo.estudomc.estudomc.endereco.Endereco;
+import com.eduardo.estudomc.estudomc.endereco.EnderecoRepository;
 import com.eduardo.estudomc.estudomc.exceptions.DataIntegrityException;
 import com.eduardo.estudomc.estudomc.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository repository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     public Cliente findById(Integer id){
         Optional<Cliente> cliente = repository.findById(id);
@@ -50,6 +56,22 @@ public class ClienteService {
         return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail());
     }
 
+    public Cliente fromDTO(ClienteNewDTO clienteNewDTO){
+        Cliente newCliente = new Cliente(null, clienteNewDTO.getNome(), clienteNewDTO.getEmail(), clienteNewDTO.getCpfOuCnpj(), TipoCliente.toEnum(clienteNewDTO.getTipoCliente()));
+        Cidade cidade = new Cidade(clienteNewDTO.getCidadeId(), null, null);
+        Endereco endereco = new Endereco(null, clienteNewDTO.getLogradouro(), clienteNewDTO.getNumero(), clienteNewDTO.getComplemento(), clienteNewDTO.getBairro(), clienteNewDTO.getCep(), newCliente, cidade);
+        newCliente.getEnderecos().add(endereco);
+        newCliente.getTelefones().add(clienteNewDTO.getTelefone01());
+        if (clienteNewDTO.getTelefone02() != null){
+            newCliente.getTelefones().add(clienteNewDTO.getTelefone02());
+        }
+        if (clienteNewDTO.getTelefone03() != null){
+            newCliente.getTelefones().add(clienteNewDTO.getTelefone03());
+        }
+
+        return newCliente;
+    }
+
     public List<Cliente> findAll() {
         return repository.findAll();
     }
@@ -57,5 +79,11 @@ public class ClienteService {
     private void updateData(Cliente newCliente, Cliente obj){
         newCliente.setNome(obj.getNome());
         newCliente.setEmail(obj.getEmail());
+    }
+
+    public Cliente insert(Cliente cliente){
+        cliente = repository.save(cliente);
+        enderecoRepository.saveAll(cliente.getEnderecos());
+        return cliente;
     }
 }

@@ -30,8 +30,9 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria categoria) {
-        this.find(categoria.getId());
-        return repository.save(categoria);
+        Categoria newCategoria = this.find(categoria.getId());
+        this.updateData(newCategoria, categoria);
+        return repository.save(newCategoria);
     }
 
     public void delete(Integer id) {
@@ -56,5 +57,9 @@ public class CategoriaService {
 
     public List<Categoria> findAll() {
         return repository.findAll();
+    }
+
+    private void updateData(Categoria newCategoria, Categoria obj){
+        newCategoria.setNome(obj.getNome());
     }
 }
