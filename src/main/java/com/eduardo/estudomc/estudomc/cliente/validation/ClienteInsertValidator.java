@@ -1,4 +1,4 @@
-package com.eduardo.estudomc.estudomc.validation;
+package com.eduardo.estudomc.estudomc.cliente.validation;
 
 import com.eduardo.estudomc.estudomc.cliente.Cliente;
 import com.eduardo.estudomc.estudomc.cliente.ClienteNewDTO;

@@ -1,6 +1,6 @@
 package com.eduardo.estudomc.estudomc.cliente;
 
-import com.eduardo.estudomc.estudomc.validation.ClienteInsert;
+import com.eduardo.estudomc.estudomc.cliente.validation.ClienteInsert;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;

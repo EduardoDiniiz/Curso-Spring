@@ -1,5 +1,6 @@
 package com.eduardo.estudomc.estudomc.cliente;
 
+import com.eduardo.estudomc.estudomc.cliente.validation.ClienteUpdate;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package com.eduardo.estudomc.estudomc.validation;
+package com.eduardo.estudomc.estudomc.cliente.validation;
 
 public class BR {
 
