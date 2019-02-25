@@ -1,9 +1,8 @@
 package com.eduardo.estudomc.estudomc.pagamento;
 
 import com.eduardo.estudomc.estudomc.pedido.Pedido;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 @Setter
 public abstract class Pagamento implements Serializable {
 
@@ -26,7 +26,7 @@ public abstract class Pagamento implements Serializable {
     @MapsId
     private Pedido pedido;
 
-    public Pagamento(){
+    public Pagamento() {
 
     }
 
@@ -36,7 +36,7 @@ public abstract class Pagamento implements Serializable {
         this.pedido = pedido;
     }
 
-    public EstadoPagamento getEstadoPagamento(){
+    public EstadoPagamento getEstadoPagamento() {
         return EstadoPagamento.toEnum(this.estadoPagamento);
     }
 }
