@@ -1,5 +1,7 @@
 package com.eduardo.estudomc.estudomc.config;
 
+import com.eduardo.estudomc.estudomc.Email.EmailService;
+import com.eduardo.estudomc.estudomc.Email.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,5 +20,10 @@ public class TestConfig {
     public boolean instantiateDatabase() throws ParseException {
         dbService.instantiateTesteDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new MockEmailService();
     }
 }

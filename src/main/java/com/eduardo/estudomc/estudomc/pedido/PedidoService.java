@@ -1,5 +1,6 @@
 package com.eduardo.estudomc.estudomc.pedido;
 
+import com.eduardo.estudomc.estudomc.Email.EmailService;
 import com.eduardo.estudomc.estudomc.ItemPedido.ItemPedido;
 import com.eduardo.estudomc.estudomc.ItemPedido.ItemPedidoRepository;
 import com.eduardo.estudomc.estudomc.cliente.ClienteRepository;
@@ -34,6 +35,9 @@ public class PedidoService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public Pedido find(Integer id) {
 
         Optional<Pedido> obj = pedidoRepository.findById(id);
@@ -64,7 +68,7 @@ public class PedidoService {
         }
 
         itemPedidoRepository.saveAll(pedido.getItens());
-        System.out.println(pedido);
+        emailService.sendOrderConfirmationEmail(pedido);
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getId()).toUri();
     }
 }
