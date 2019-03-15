@@ -1,7 +1,7 @@
 package com.eduardo.estudomc.estudomc.config;
 
 import com.eduardo.estudomc.estudomc.Email.EmailService;
-import com.eduardo.estudomc.estudomc.Email.MockEmailService;
+import com.eduardo.estudomc.estudomc.Email.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +24,6 @@ public class TestConfig {
 
     @Bean
     public EmailService emailService(){
-        return new MockEmailService();
+        return new SmtpEmailService();
     }
 }
