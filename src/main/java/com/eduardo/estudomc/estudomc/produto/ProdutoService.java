@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 public class ProdutoService {
 
     @Autowired
-    ProdutoRepository produtoRepository;
+    private ProdutoRepository produtoRepository;
 
     @Autowired
-    CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
     public Produto find(Integer id){
 

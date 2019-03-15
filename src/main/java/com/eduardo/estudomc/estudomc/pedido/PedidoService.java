@@ -2,10 +2,10 @@ package com.eduardo.estudomc.estudomc.pedido;
 
 import com.eduardo.estudomc.estudomc.ItemPedido.ItemPedido;
 import com.eduardo.estudomc.estudomc.ItemPedido.ItemPedidoRepository;
+import com.eduardo.estudomc.estudomc.cliente.ClienteRepository;
 import com.eduardo.estudomc.estudomc.exceptions.ObjectNotFoundException;
 import com.eduardo.estudomc.estudomc.pagamento.PagamentoComBoleto;
 import com.eduardo.estudomc.estudomc.pagamento.PagamentoRepository;
-import com.eduardo.estudomc.estudomc.produto.Produto;
 import com.eduardo.estudomc.estudomc.produto.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +31,9 @@ public class PedidoService {
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     public Pedido find(Integer id) {
 
         Optional<Pedido> obj = pedidoRepository.findById(id);
@@ -43,6 +46,7 @@ public class PedidoService {
         pedido.setInstate(new Date());
         pedido.getPagamento().setEstadoPagamento(1);
         pedido.getPagamento().setPedido(pedido);
+        pedido.setCliente(clienteRepository.findById(pedido.getCliente().getId()).get());
         if (pedido.getPagamento() instanceof PagamentoComBoleto) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(pedido.getInstate());
@@ -54,12 +58,13 @@ public class PedidoService {
 
         for (ItemPedido itemPedido : pedido.getItens()) {
             itemPedido.setDesconto(0.0);
-            Produto produto = produtoRepository.findById(itemPedido.getProduto().getId()).get();
-            itemPedido.setPreco(produto.getPreco());
+            itemPedido.setProduto(produtoRepository.findById(itemPedido.getProduto().getId()).get());
+            itemPedido.setPreco(itemPedido.getProduto().getPreco());
             itemPedido.setPedido(pedido);
         }
 
         itemPedidoRepository.saveAll(pedido.getItens());
+        System.out.println(pedido);
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getId()).toUri();
     }
 }
